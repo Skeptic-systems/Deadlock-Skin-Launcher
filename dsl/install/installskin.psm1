@@ -1,4 +1,4 @@
-import-module "C:\Users\jonas\Desktop\DSL\dsl\git\install\submenu.psm1"
+import-module "C:\Program Files\dsl\install\submenu.psm1"
 # Get Config
 
 
@@ -20,7 +20,18 @@ function install-skin {
         [string]$Downloadlink4,
         [string]$Downloadlink5
     )
-    do{
+do{
+clear-host
+write-host @"
+    ____                 ____           __      _____ __   _          __                           __             
+   / __ \___  ____ _____/ / /___  _____/ /__   / ___// /__(_)___     / /   ____ ___  ______  _____/ /_  ___  _____
+  / / / / _ \/ __  / __  / / __ \/ ___/ //_/   \__ \/ //_/ / __ \   / /   / __  / / / / __ \/ ___/ __ \/ _ \/ ___/
+ / /_/ /  __/ /_/ / /_/ / / /_/ / /__/ ,<     ___/ /  < / / / / /  / /___/ /_/ / /_/ / / / / /__/ / / /  __/ /    
+/_____/\___/\__,_/\__,_/_/\____/\___/_/|_|   /____/_/|_/_/_/ /_/  /_____/\__,_/\__,_/_/ /_/\___/_/ /_/\___/_/     
+"@ -ForegroundColor Green
+write-host "by Skeptic" -ForegroundColor Cyan
+Write-Host "`n`n`n"
+    
     $isvalid1 = $false
     $isvalid2 = $false
     $isvalid3 = $false
@@ -46,13 +57,14 @@ function install-skin {
         Write-Host $Display5 
         $isvalid5 = $true
     }
+    Write-Host "[e] To go back"
     Write-Host ""
-    Write-Host "Choose a Skin"
-    $caseinput = Read-Host
+    write-host " > " -NoNewline -ForegroundColor cyan
+    $caseInput = Read-Host
     switch ($caseInput) {
         1 {
             if ($isvalid1) {
-            Install-detail -Display $Display1 -Inspectlink $Inspectlink1 -Downloadlink $Downloadlink1
+                Install-detail -Display $Display1 -Inspectlink $Inspectlink1 -Downloadlink $Downloadlink1
         }
         }
         2 {
@@ -76,7 +88,7 @@ function install-skin {
             }
         }
         "e" {
-            return
+            & "C:\Program Files\dsl\install\install.ps1"
         }
         Default {}
     }
