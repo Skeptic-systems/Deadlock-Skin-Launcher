@@ -12,6 +12,18 @@ function Save-Config {
     $json = $ConfigData | ConvertTo-Json -Depth 10
     $json | Set-Content -Path $ConfigPath
 }
+
+function Get-Config {
+    param(
+        [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
+    )
+        if (!($ConfigPath)){
+            new-item $ConfigPath
+        }
+        $jsonContent = Get-Content -Path $ConfigPath -Raw
+        $configObject = $jsonContent | ConvertFrom-Json
+        return $configObject
+}
 clear-host
 write-host @"
     ____                 ____           __      _____ __   _          __                           __             
