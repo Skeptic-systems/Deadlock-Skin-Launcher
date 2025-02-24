@@ -85,10 +85,10 @@ function Install-detail {
                 # Erfolgreiche Ausgabe
                 $skinPath = Join-Path -Path $InstallPath -ChildPath $Filename
                 if (Test-path $skinPath) {
-                    Write-Host "Skin erfolgreich installiert" -ForegroundColor Green
+                    Write-Host "Skin installed successfully" -ForegroundColor Green
                 }
                 else {
-                    write-host "Der Skin konnte nicht installiert werden" -ForegroundColor Red
+                    write-host "The skin could not be installed" -ForegroundColor Red
                 }
                 start-sleep -Seconds 2
 
@@ -97,8 +97,9 @@ function Install-detail {
                 & "C:\Program Files\dsl\install\install.ps1"
             }
             default {
-                Write-Host "Ungültige Eingabe"
+                Write-Host "Invalid input"
                 $validinput = $false
+                start-sleep -Seconds 2
             }
         }
     }while ($validinput -eq $false)

@@ -30,7 +30,7 @@ function subswitch {
     Write-Host "[d] Delete the Skin"
     Write-Host "[e] To go back"
 
-    $userInput = Read-Host "Bitte wähle eine Option"
+    $userInput = Read-Host "Please choose an option"
     switch ($userInput) {
         "i" {
             Start-Process $Inspectlink
@@ -44,10 +44,10 @@ function subswitch {
             Remove-Item -Path $skinPath -Force
             Remove-Charlist -Filename $Filename
             if (!(test-path $skinPath)) {
-                Write-Host "Der Skin wurde gelöscht" -ForegroundColor Green
+                Write-Host "The skin has been successfully deleted" -ForegroundColor Green
             }
             else {
-                Write-Host "Der wurde nicht gelöscht es ist ein Fehler aufgetreten" -ForegroundColor Red
+                Write-Host "The skin was not deleted an error occurred" -ForegroundColor Red
             }
         }
         "e" {

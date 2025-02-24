@@ -63,8 +63,8 @@ write-Host @"
             1 {
                 $skinName = Get-Classname -ClassName "abrams"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Abrams installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Abrams installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -75,8 +75,8 @@ write-Host @"
             2 {
                 $skinName = Get-Classname -ClassName "bebop"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Bebop installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Bebop installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -87,8 +87,8 @@ write-Host @"
             3 {
                 $skinName = Get-Classname -ClassName "dynamo"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Dynamo installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Dynamo installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -99,8 +99,8 @@ write-Host @"
             4 {
                 $skinName = Get-Classname -ClassName "greytalon"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Grey Talon installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Grey Talon installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -111,8 +111,8 @@ write-Host @"
             5 {
                 $skinName = Get-Classname -ClassName "haze"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Haze installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Haze installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -123,8 +123,8 @@ write-Host @"
             6 {
                 $skinName = Get-Classname -ClassName "infernus"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Infernus installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Infernus installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -135,8 +135,8 @@ write-Host @"
             7 {
                 $skinName = Get-Classname -ClassName "ivy"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Ivy installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Ivy installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -147,8 +147,8 @@ write-Host @"
             8 {
                 $skinName = Get-Classname -ClassName "kelvin"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Kelvin installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Kelvin installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -159,8 +159,8 @@ write-Host @"
             9 {
                 $skinName = Get-Classname -ClassName "ladygeist"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Ladygeist installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Ladygeist installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -171,8 +171,8 @@ write-Host @"
             10 {
                 $skinName = Get-Classname -ClassName "lash"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Lash installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Lash installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -183,8 +183,8 @@ write-Host @"
             11 {
                 $skinName = Get-Classname -ClassName "mcginnius"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Mcginnius installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Mcginnius installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -195,8 +195,8 @@ write-Host @"
             12 {
                 $skinName = Get-Classname -ClassName "mirage"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Mirage installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Mirage installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -207,8 +207,8 @@ write-Host @"
             13 {
                 $skinName = Get-Classname -ClassName "mo and krill"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Mo and Krill installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Mo and Krill installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -219,8 +219,8 @@ write-Host @"
             14 {
                 $skinName = Get-Classname -ClassName "paradox"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Paradox installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Paradox installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -231,8 +231,8 @@ write-Host @"
             15 {
                 $skinName = Get-Classname -ClassName "pocket"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Pocket installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Pocket installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -243,8 +243,8 @@ write-Host @"
             16 {
                 $skinName = Get-Classname -ClassName "seven"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Seven installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Seven installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -255,8 +255,8 @@ write-Host @"
             17 {
                 $skinName = Get-Classname -ClassName "shiv"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Shiv installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Shiv installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -267,8 +267,8 @@ write-Host @"
             18 {
                 $skinName = Get-Classname -ClassName "vindicta"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Vindicta installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Vindicta installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -279,8 +279,8 @@ write-Host @"
             19 {
                 $skinName = Get-Classname -ClassName "viper"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Viper installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Viper installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -291,8 +291,8 @@ write-Host @"
             20 {
                 $skinName = Get-Classname -ClassName "viscous"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Viscous installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Viscous installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -303,8 +303,8 @@ write-Host @"
             21 {
                 $skinName = Get-Classname -ClassName "warden"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Warden installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Warden installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -315,8 +315,8 @@ write-Host @"
             22 {
                 $skinName = Get-Classname -ClassName "wraith"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Wraith installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Wraith installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -327,8 +327,8 @@ write-Host @"
             23 {
                 $skinName = Get-Classname -ClassName "yamato"
                 if ($skinName) {
-                    Write-Host "Es ist Bereits ein Skin für Yamato installiert." -ForegroundColor Red
-                    Write-Host "Der Skin ist: $skinName" -ForegroundColor Red
+                    Write-Host "There is already a skin for Yamato installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
                     $validinput = $false
                     Start-Sleep -Seconds 3
                 }
@@ -337,7 +337,7 @@ write-Host @"
                 }
             }
             "e" {
-                & "C:\Users\jonas\Nextcloud\Documents\Skripts\Powershell\Deadlock Skin Launcher\Deadlock-Skin-Launcher\dsl\install\install.ps1"
+                & "C:\Program Files\dsl\install\install.ps1"
             }
             default {
                 $validinput = $false
@@ -345,11 +345,11 @@ write-Host @"
         }
     }            
     2 { 
-        & "C:\Users\jonas\Nextcloud\Documents\Skripts\Powershell\Deadlock Skin Launcher\Deadlock-Skin-Launcher\dsl\main.ps1"
+        & "C:\Program Files\dsl\main.ps1"
         $validinput = $true 
     }
     "e" {
-        & "C:\Users\jonas\Nextcloud\Documents\Skripts\Powershell\Deadlock Skin Launcher\Deadlock-Skin-Launcher\dsl\main.ps1"
+        & "C:\Program Files\dsl\main.ps1"
     }    
     default {
         write-host "wrong case input"

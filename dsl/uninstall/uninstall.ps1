@@ -14,7 +14,7 @@ do {
 "@ -ForegroundColor Green
 
     Write-Host "by Skeptic" -ForegroundColor Cyan
-    Write-Host "`nDie folgenden Skins sind installiert:" -ForegroundColor Yellow
+    Write-Host "`nThe following Skins are installed:" -ForegroundColor Yellow
     Write-Host ""
 
     # Ermittele Konfiguration und installierte Skins
@@ -42,7 +42,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 1 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 1 is not installed!"; $validinput = $false }
         }
         "2" {
             if ($entries.Count -ge 2) {
@@ -50,7 +50,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 2 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 2 is not installed!"; $validinput = $false }
         }
         "3" {
             if ($entries.Count -ge 3) {
@@ -58,7 +58,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 3 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 3 is not installed!"; $validinput = $false }
         }
         "4" {
             if ($entries.Count -ge 4) {
@@ -66,7 +66,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 4 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 4 is not installed!"; $validinput = $false }
         }
         "5" {
             if ($entries.Count -ge 5) {
@@ -74,7 +74,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 5 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 5 is not installed!"; $validinput = $false }
         }
         "6" {
             if ($entries.Count -ge 6) {
@@ -82,7 +82,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 6 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 6 is not installed!"; $validinput = $false }
         }
         "7" {
             if ($entries.Count -ge 7) {
@@ -90,7 +90,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 7 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 7 is not installed!"; $validinput = $false }
         }
         "8" {
             if ($entries.Count -ge 8) {
@@ -98,7 +98,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 8 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 8 is not installed!"; $validinput = $false }
         }
         "9" {
             if ($entries.Count -ge 9) {
@@ -106,7 +106,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 9 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 9 is not installed!"; $validinput = $false }
         }
         "10" {
             if ($entries.Count -ge 10) {
@@ -114,7 +114,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 10 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 10 is not installed!"; $validinput = $false }
         }
         "11" {
             if ($entries.Count -ge 11) {
@@ -122,7 +122,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 11 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 11 is not installed!"; $validinput = $false }
         }
         "12" {
             if ($entries.Count -ge 12) {
@@ -130,7 +130,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 12 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 12 is not installed!"; $validinput = $false }
         }
         "13" {
             if ($entries.Count -ge 13) {
@@ -138,7 +138,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 13 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 13 is not installed!"; $validinput = $false }
         }
         "14" {
             if ($entries.Count -ge 14) {
@@ -146,7 +146,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 14 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 14 is not installed!"; $validinput = $false }
         }
         "15" {
             if ($entries.Count -ge 15) {
@@ -154,7 +154,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 15 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 15 is not installed!"; $validinput = $false }
         }
         "16" {
             if ($entries.Count -ge 16) {
@@ -162,7 +162,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 16 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 16 is not installed!"; $validinput = $false }
         }
         "17" {
             if ($entries.Count -ge 17) {
@@ -170,7 +170,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 17 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 17 is not installed!"; $validinput = $false }
         }
         "18" {
             if ($entries.Count -ge 18) {
@@ -178,7 +178,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 18 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 18 is not installed!"; $validinput = $false }
         }
         "19" {
             if ($entries.Count -ge 19) {
@@ -186,7 +186,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 19 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 19 is not installed!"; $validinput = $false }
         }
         "20" {
             if ($entries.Count -ge 20) {
@@ -194,7 +194,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 20 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 20 is not installed!"; $validinput = $false }
         }
         "21" {
             if ($entries.Count -ge 21) {
@@ -202,7 +202,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 21 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 21 is not installed!"; $validinput = $false }
         }
         "22" {
             if ($entries.Count -ge 22) {
@@ -210,7 +210,7 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 22 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 22 is not installed!"; $validinput = $false }
         }
         "23" {
             if ($entries.Count -ge 23) {
@@ -218,13 +218,14 @@ do {
                 subswitch -Skin $skin 
                 $validinput = $true
             }
-            else { Write-Host "Skin 23 ist nicht installiert!"; $validinput = $false }
+            else { Write-Host "Skin 23 is not installed!"; $validinput = $false }
         }
         "e" {
             & "C:\Program Files\dsl\main.ps1"
         }
         Default {
-            Write-Host "Ungültige Eingabe. Bitte wähle einen gültigen Wert." -ForegroundColor Red
+            Write-Host "Invalid input. Please choose a valid value" -ForegroundColor Red
+            start-sleep -Seconds 2
             $validinput = $false
         }
     }

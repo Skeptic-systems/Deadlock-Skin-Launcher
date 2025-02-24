@@ -8,32 +8,7 @@ if (!(test-path $workdir)){
     mkdir $workdir
 }
 
-# Test Deadlock Path
-$installpath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
-if (!($installpath))
-    {
-    do{
-        write-host "Deadlock ist nicht auf C installiert" -ForegroundColor Red
-        write-host "Bitte den vollen Pfad bis in citadel angeben"
-        $changepath = Read-Host
-        if (!(test-path $changepath)){
-            $validinput = $false
-            write-host "Der Pfad $changepath konnte nicht gefunden werden"
-            start-sleep -Seconds 3
-        }
-        else {
-        mkdir $changepath\addons
-        $configData = @{installpath = "$changepath\addons"}
-        Save-Config -ConfigData $configData
-        }
-    } while (!($validinput))
-}
-else {
-    if (!(test-path "$installpath\addons")){
-    mkdir "$installpath\addons"}
-    $configData = @{installpath = "$installpath\addons"}
-    Save-Config -ConfigData $configData
-}
+
 
 
 
@@ -67,11 +42,13 @@ switch($caseInput){
         $validinput = $true 
     }            
     3 {
-        & "$workdir\dsl\fix\fix.ps1"
+        Write-Host "This Case is work in progress" -ForegroundColor Red
+        start-sleep -Seconds 2
         $validinput = $true 
     }            
     4 {
-        & "$workdir\dsl\uninstall\dsl\uninstall.ps1"
+        Write-Host "This Case is work in progress" -ForegroundColor Red
+        start-sleep -Seconds 2
         $validinput = $true
     }        
     default {
