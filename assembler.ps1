@@ -83,7 +83,7 @@ if (!(Test-path "C:\Program Files\dsl\main-ps1")) {
     # Read Path
     $config = Get-Config
     $installpath = $config.installpath
-    Remove-Item -Path "$installpath\*" -Recurse -Force
+    #Remove-Item -Path "$installpath\*" -Recurse -Force
     & "C:\Program Files\dsl\main.ps1"
 }
 
