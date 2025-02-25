@@ -32,17 +32,25 @@ if (!(Test-Path "C:\Program Files\dsl")) {
     Remove-Item -Path (Join-Path $destinationFolder "Deadlock-Skin-Launcher-main") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item $zipFile -Force -ErrorAction SilentlyContinue
 }
-$Null = Read-Host
 
 
 $jsonPath = "C:\Program Files\dsl\install\config.json"
+
+# Falls die JSON-Datei noch nicht existiert, erstellen.
 if (-not (Test-Path $jsonPath)) {
     New-Item -Path $jsonPath -ItemType File -Force | Out-Null
 }
-# Konfiguration laden oder leeres Objekt erstellen.
-$config = if (Test-Path $jsonPath) {
-    Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+
+# JSON-Inhalt laden
+$jsonContent = Get-Content -Path $jsonPath -Raw
+
+# Wenn die Datei leer ist, ein leeres, geordnetes Objekt erstellen.
+if ($jsonContent.Trim() -eq "") {
+    $config = [ordered]@{}
+} else {
+    $config = $jsonContent | ConvertFrom-Json
 }
+
 if (-not $config.installpath) {
     $defaultPath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
     
@@ -52,8 +60,7 @@ if (-not $config.installpath) {
         if (-not (Test-Path $installDir)) {
             New-Item -Path $installDir -ItemType Directory | Out-Null
         }
-        $jsonData["version"] = "1.0.0"
-        $jsonData | ConvertTo-Json -Depth 5 | Set-Content $jsonPath
+        $config.version = "1.0.0"
         $config.installpath = $installDir
     } else {
         # Standardpfad existiert nicht – Benutzer eingeben lassen.
@@ -65,17 +72,17 @@ if (-not $config.installpath) {
         if (-not (Test-Path $installDir)) {
             New-Item -Path $installDir -ItemType Directory | Out-Null
         }
-        $jsonData["version"] = "1.0.0"
-        $jsonData | ConvertTo-Json -Depth 5 | Set-Content $jsonPath
+        $config.version = "1.0.0"
         $config.installpath = $installDir
     }
     
     # Konfiguration abspeichern.
     $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
-     & "C:\Program Files\dsl\main.ps1"
+    & "C:\Program Files\dsl\main.ps1"
 } else {
     Write-Output $config.installpath
 }
+
 
 
 
