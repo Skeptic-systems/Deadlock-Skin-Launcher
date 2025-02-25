@@ -78,6 +78,8 @@ if (-not $config.installpath) {
     
     # Konfiguration abspeichern.
     $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
+
+    $Null = Read-host
     & "C:\Program Files\dsl\main.ps1"
 } else {
     Write-Output $config.installpath
