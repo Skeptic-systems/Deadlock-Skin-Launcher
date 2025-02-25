@@ -18,7 +18,8 @@ do {
     Write-Host ""
 
     # Ermittele Konfiguration und installierte Skins
-    $config = Get-Config
+    $jsonPath = "C:\Program Files\dsl\install\config.json"
+    $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
     $installpath = $config.installpath
     $fileNames = Get-ChildItem -Path "$installpath\" -File | ForEach-Object { $_.Name }
     $entries = Get-Charlist

@@ -34,7 +34,8 @@ function Install-detail {
             "d" {
                 # Mit Debuggen
                 Write-Host "Downloading"
-                $config = Get-Config
+                $jsonPath = "C:\Program Files\dsl\install\config.json"
+                $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
                 $installpath = $config.installpath
                 write-host "Installpath: $installpath"
                 Write-Host "Downloading ZIP file..."

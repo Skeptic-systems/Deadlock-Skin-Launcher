@@ -37,7 +37,8 @@ function subswitch {
             $validinput = $false
         }
         "d" {
-            $config = Get-Config
+            $jsonPath = "C:\Program Files\dsl\install\config.json"
+            $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
             $installpath = $config.installpath
             write-host "$installpath"
             $skinPath = Join-Path -Path $InstallPath -ChildPath $Filename
