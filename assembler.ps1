@@ -1,47 +1,4 @@
 #gameinfo.gi anpassen 
-function Save-Config {
-    param(
-        [Parameter(Mandatory = $true)]
-        [hashtable]$ConfigData,
-        
-        [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
-    )
-    
-    # Bestehende Konfiguration laden (falls vorhanden)
-    $existingHashtable = @{}
-    if (Test-Path $ConfigPath) {
-        $existingConfig = Get-Content -Path $ConfigPath -Raw | ConvertFrom-Json
-        if ($existingConfig) {
-            foreach ($prop in $existingConfig.PSObject.Properties) {
-                $existingHashtable[$prop.Name] = $prop.Value
-            }
-        }
-    }
-    
-    # Neue Werte einfügen bzw. vorhandene überschreiben
-    foreach ($key in $ConfigData.Keys) {
-         $existingHashtable[$key] = $ConfigData[$key]
-    }
-    
-    # Als JSON speichern
-    $json = $existingHashtable | ConvertTo-Json -Depth 10
-    $json | Set-Content -Path $ConfigPath
-}
-
-function Get-Config {
-    param(
-        [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
-    )
-    if (!(Test-Path $ConfigPath)){
-        # Falls die Konfigurationsdatei noch nicht existiert, eine leere anlegen
-        $emptyConfig = @{}
-        $emptyConfig | ConvertTo-Json -Depth 10 | Set-Content -Path $ConfigPath
-    }
-    $jsonContent = Get-Content -Path $ConfigPath -Raw
-    $configObject = $jsonContent | ConvertFrom-Json
-    return $configObject
-}
-
 clear-host
 write-host @"
     ____                 ____           __      _____ __   _          __                           __             
@@ -51,41 +8,42 @@ write-host @"
 /_____/\___/\__,_/\__,_/_/\____/\___/_/|_|   /____/_/|_/_/_/ /_/  /_____/\__,_/\__,_/_/ /_/\___/_/ /_/\___/_/     
 "@ -ForegroundColor Green
 write-host "by Skeptic" -ForegroundColor Cyan
-Write-Host "nnn"
+Write-Host "`n`n`n"
+
+Unblock-File -Path "C:\Program Files\dsl\install\install.ps1"
+Unblock-File -Path "C:\Program Files\dsl\main.ps1"
+Unblock-File -Path "C:\Program Files\dsl\uninstall\uninstall.ps1"
+
+$jsonPath = "C:\Program Files\dsl\install\config.json"
+if (!(Test-Path $jsonPath)) {
+    New-Item $jsonPath -ItemType File -Force
+    $jsonData = @{}
+}
+
+$jsonPath = "C:\Program Files\dsl\install\config.json"
+$config = if (Test-Path $jsonPath) { Get-Content -Path $jsonPath -Raw | ConvertFrom-Json } else { @{} }
+if (-not $config.installpath) {
+    $defaultPath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
+    if (Test-Path $defaultPath -and $defaultPath.Contains("steamapps\common\Deadlock\game\citadel")) {
+        $p = Join-Path $defaultPath "addons"
+        if (-not (Test-Path $p)) { New-Item -Path $p -ItemType Directory | Out-Null }
+        $config.installpath = $p
+    } else {
+        do { $u = Read-Host "Pfad eingeben (mind. 'steamapps\common\Deadlock\game\citadel')" } until (Test-Path $u -and $u.Contains("steamapps\common\Deadlock\game\citadel"))
+        $p = Join-Path $u "addons"
+        if (-not (Test-Path $p)) { New-Item -Path $p -ItemType Directory | Out-Null }
+        $config.installpath = $p
+    }
+    $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
+} else {
+    Write-Output $config.installpath
+}
+
+
 
 # Test Deadlock Path
-$installpath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
-if (!(Test-Path $installpath)) {
-    $validinput = $false
-    do {
-        write-host "Deadlock ist nicht auf C installiert" -ForegroundColor Red
-        write-host "Bitte den vollen Pfad bis in citadel angeben"
-        $changepath = Read-Host
-        if (!(Test-Path $changepath)){
-            $validinput = $false
-            write-host "Der Pfad $changepath konnte nicht gefunden werden"
-            start-sleep -Seconds 2
-        }
-        else {
-            $validinput = $true
-            if (!(Test-Path "$changepath\addons")){
-                mkdir "$changepath\addons" | Out-Null
-            }
-            $configData = @{ installpath = "$changepath\addons" }
-            Save-Config -ConfigData $configData
-        }
-    } while (-not $validinput)
-}
-else {
-    if (!(Test-Path "$installpath\addons")){
-        mkdir "$installpath\addons" | Out-Null
-    }
-    $configData = @{ installpath = "$installpath\addons" }
-    Save-Config -ConfigData $configData
-}
-
 # Wenn Dsl noch nicht installiert ist
-if (!(Test-Path "C:\Program Files\dsl\main-ps1")) {
+if (!(Test-Path "C:\Program Files\dsl")) {
     # Initial Download
     mkdir "C:\Program Files\dsl" -Force | Out-Null
     $zipFile = "$env:TEMP\Deadlock-Skin-Launcher.zip"
@@ -98,22 +56,30 @@ if (!(Test-Path "C:\Program Files\dsl\main-ps1")) {
     }
     Remove-Item -Path (Join-Path $destinationFolder "Deadlock-Skin-Launcher-main") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item $zipFile -Force -ErrorAction SilentlyContinue
-    $configData = @{ version = "1.0.0" }
-    Save-Config -ConfigData $configData
-    $config = Get-Config
-    $installpath = $config.installpath
-    Remove-Item -Path "$installpath\*" -Recurse -Force
-    & "C:\Program Files\dsl\main.ps1"
+    $jsonData["version"] = "1.0.0"
+    $jsonData | ConvertTo-Json -Depth 5 | Set-Content $jsonPath
+    #$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+    #$installPath = $config.installpath
+    #if (Test-Path $installPath) {
+    #    Remove-Item "$installPath\*" -Recurse -Force
+    #}
+     & "C:\Program Files\dsl\main.ps1"
 }
 
+    $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+    $version = $configObject.version
+
 # Versions-Update in der JSON (von 1.0.0 auf 2.0.0)
-#$config = Get-Config
-#$version = $config.version
 #if ($version -eq "1.0.0") {
-#    Write-Host "Aktualisiere Version von 1.0.0 auf 2.0.0..." -ForegroundColor Yellow
-#    Save-Config -ConfigData @{ version = "2.0.0" }
-#    $version = "2.0.0"
+# Pfad zur JSON-Datei
+#$config = Get-Content -Path "C:\Program Files\dsl\install\config.json" -Raw | ConvertFrom-Json
+#$config.version = "2.0.0"
+#$config | ConvertTo-Json -Depth 10 | Set-Content "C:\Program Files\dsl\install\config.json"
 #}
+#$jsonPath = "C:\Program Files\dsl\install\config.json"
+#$configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+#$version = $configObject.version
+
 
 if ($version -eq "2.0.0") {
     Write-Host "Lade neue Dateien für Version 2.0.0 nach..." -ForegroundColor Cyan

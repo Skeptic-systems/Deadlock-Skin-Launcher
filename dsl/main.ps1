@@ -2,16 +2,6 @@
 import-module "C:\Program Files\dsl\install\args.psm1"
 #import-module
 #import-module
-# Create workdir
-$workdir = "C:\Program Files\dsl"
-if (!(test-path $workdir)){
-    mkdir $workdir
-}
-
-
-
-
-
 do {
 clear-host
 write-host @"

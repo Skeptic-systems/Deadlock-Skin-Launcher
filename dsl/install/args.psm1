@@ -1,38 +1,32 @@
-function Save-Config {
+function Save-config {
     param(
         [Parameter(Mandatory = $true)]
-        [hashtable]$ConfigData,
-        
+        [string]$Key,
+        [Parameter(Mandatory = $true)]
+        [object]$Value,
         [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
     )
-    $existingHashtable = @{}
     if (Test-Path $ConfigPath) {
-        $existingConfig = Get-Content -Path $ConfigPath -Raw | ConvertFrom-Json
-        if ($existingConfig) {
-            foreach ($prop in $existingConfig.PSObject.Properties) {
-                $existingHashtable[$prop.Name] = $prop.Value
-            }
+        $jsonData = Get-Content $ConfigPath -Raw | ConvertFrom-Json
+        if (-not $jsonData) {
+            $jsonData = @{}
         }
+    } else {
+        $jsonData = @{}
     }
-    foreach ($key in $ConfigData.Keys) {
-         $existingHashtable[$key] = $ConfigData[$key]
-    }
-    $json = $existingHashtable | ConvertTo-Json -Depth 10
-    $json | Set-Content -Path $ConfigPath
+    $jsonData[$Key] = $Value
+    $jsonData | ConvertTo-Json -Depth 10 | Set-Content $ConfigPath
 }
 
 function Get-Config {
     param(
         [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
     )
-    if (!(Test-Path $ConfigPath)){
-        $emptyConfig = @{}
-        $emptyConfig | ConvertTo-Json -Depth 10 | Set-Content -Path $ConfigPath
-    }
     $jsonContent = Get-Content -Path $ConfigPath -Raw
     $configObject = $jsonContent | ConvertFrom-Json
     return $configObject
 }
+
 
 function Save-Charlist {
     [CmdletBinding()]
