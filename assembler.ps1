@@ -12,30 +12,7 @@ Write-Host "`n`n`n"
 
 
 
-$jsonPath = "C:\Program Files\dsl\install\config.json"
-if (!(Test-Path $jsonPath)) {
-    New-Item $jsonPath -ItemType File -Force
-    $jsonData = @{}
-}
 
-$jsonPath = "C:\Program Files\dsl\install\config.json"
-$config = if (Test-Path $jsonPath) { Get-Content -Path $jsonPath -Raw | ConvertFrom-Json } else { @{} }
-if (-not $config.installpath) {
-    $defaultPath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
-    if (Test-Path $defaultPath -and $defaultPath.Contains("steamapps\common\Deadlock\game\citadel")) {
-        $p = Join-Path $defaultPath "addons"
-        if (-not (Test-Path $p)) { New-Item -Path $p -ItemType Directory | Out-Null }
-        $config.installpath = $p
-    } else {
-        do { $u = Read-Host "Pfad eingeben (mind. 'steamapps\common\Deadlock\game\citadel')" } until (Test-Path $u -and $u.Contains("steamapps\common\Deadlock\game\citadel"))
-        $p = Join-Path $u "addons"
-        if (-not (Test-Path $p)) { New-Item -Path $p -ItemType Directory | Out-Null }
-        $config.installpath = $p
-    }
-    $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
-} else {
-    Write-Output $config.installpath
-}
 
 
 
@@ -54,15 +31,64 @@ if (!(Test-Path "C:\Program Files\dsl")) {
     }
     Remove-Item -Path (Join-Path $destinationFolder "Deadlock-Skin-Launcher-main") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item $zipFile -Force -ErrorAction SilentlyContinue
-    $jsonData["version"] = "1.0.0"
-    $jsonData | ConvertTo-Json -Depth 5 | Set-Content $jsonPath
+}
+
+
+$jsonPath = "C:\Program Files\dsl\install\config.json"
+
+if (-not (Test-Path $jsonPath)) {
+    New-Item -Path $jsonPath -ItemType File -Force | Out-Null
+}
+
+# Konfiguration laden oder leeres Objekt erstellen.
+$config = if (Test-Path $jsonPath) {
+    Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+}
+
+if (-not $config.installpath) {
+    $defaultPath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
+    
+    if (Test-Path $defaultPath) {
+        # Standardpfad existiert – verwende ihn.
+        $installDir = Join-Path $defaultPath "addons"
+        if (-not (Test-Path $installDir)) {
+            New-Item -Path $installDir -ItemType Directory | Out-Null
+        }
+        $jsonData["version"] = "1.0.0"
+        $jsonData | ConvertTo-Json -Depth 5 | Set-Content $jsonPath
+        $config.installpath = $installDir
+    } else {
+        # Standardpfad existiert nicht – Benutzer eingeben lassen.
+        do {
+            $userInput = Read-Host "Bitte Pfad eingeben (Pfad muss 'steamapps\common\Deadlock\game\citadel' enthalten)"
+        } until (Test-Path $userInput -and $userInput -like "*steamapps\common\Deadlock\game\citadel*")
+        
+        $installDir = Join-Path $userInput "addons"
+        if (-not (Test-Path $installDir)) {
+            New-Item -Path $installDir -ItemType Directory | Out-Null
+        }
+        $jsonData["version"] = "1.0.0"
+        $jsonData | ConvertTo-Json -Depth 5 | Set-Content $jsonPath
+        $config.installpath = $installDir
+    }
+    
+    # Konfiguration abspeichern.
+    $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
+     & "C:\Program Files\dsl\main.ps1"
+} else {
+    Write-Output $config.installpath
+}
+
+
+
+
     #$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
     #$installPath = $config.installpath
     #if (Test-Path $installPath) {
     #    Remove-Item "$installPath\*" -Recurse -Force
     #}
-     & "C:\Program Files\dsl\main.ps1"
-}
+    
+
 
     $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
     $version = $configObject.version
