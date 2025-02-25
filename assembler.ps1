@@ -52,6 +52,7 @@ if (-not $config.installpath) {
         if (-not (Test-Path $installDir)) {
             New-Item -Path $installDir -ItemType Directory | Out-Null
         }
+        Remove-Item "$installDir\*" -Recurse -Force
         $config.version = "1.0.0"
         $config.installpath = $installDir
     } else {
@@ -64,6 +65,7 @@ if (-not $config.installpath) {
         if (-not (Test-Path $installDir)) {
             New-Item -Path $installDir -ItemType Directory | Out-Null
         }
+        Remove-Item "$installDir\*" -Recurse -Force
         $config.version = "1.0.0"
         $config.installpath = $installDir
     }
@@ -71,18 +73,7 @@ if (-not $config.installpath) {
     # Konfiguration abspeichern.
     $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
     & "C:\Program Files\dsl\main.ps1"
-} else {
-    Write-Output $config.installpath
 }
-
-
-
-
-    #$config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
-    #$installPath = $config.installpath
-    #if (Test-Path $installPath) {
-    #    Remove-Item "$installPath\*" -Recurse -Force
-    #}
 
 
     # Pfad zur JSON-Datei
