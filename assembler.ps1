@@ -32,6 +32,7 @@ if (!(Test-Path "C:\Program Files\dsl")) {
     Remove-Item -Path (Join-Path $destinationFolder "Deadlock-Skin-Launcher-main") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item $zipFile -Force -ErrorAction SilentlyContinue
 }
+$Null = Read-Host
 
 
 $jsonPath = "C:\Program Files\dsl\install\config.json"
