@@ -52,9 +52,9 @@ function Install-detail {
                 $Filename = $packageFolder.Name
                 write-host "$Filename" -ForegroundColor Yellow
                 
-                #Write-Host "Moving files..."
-                #Move-Item "$env:TEMP\unzipped\*" "$installpath" -Force -Verbose
-                #Write-Host "Files moved successfully."
+                Write-Host "Moving files..."
+                Move-Item "$env:TEMP\unzipped\*" "$installpath" -Force -Verbose
+                Write-Host "Files moved successfully."
                 Remove-Item "$env:TEMP\tmp.zip" -Force -ErrorAction SilentlyContinue
                 Remove-Item "$env:TEMP\unzipped" -Recurse -Force -ErrorAction SilentlyContinue
                 
