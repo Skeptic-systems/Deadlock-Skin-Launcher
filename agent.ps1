@@ -9,9 +9,4 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 Write-Host "Connecting ..." -ForegroundColor Green
-try {
-    iwr -useb "https://raw.githubusercontent.com/Skeptic-systems/Deadlock-Skin-Launcher/refs/heads/main/assembler.ps1" | iex
-}
-catch {
-    Write-Host "Es gab einen Fehler beim Herunterladen der Datei"
-}
+iwr -useb "https://raw.githubusercontent.com/Skeptic-systems/Deadlock-Skin-Launcher/refs/heads/main/assembler.ps1" | iex
