@@ -10,9 +10,7 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 
-Unblock-File -Path "C:\Program Files\dsl\install\install.ps1"
-Unblock-File -Path "C:\Program Files\dsl\main.ps1"
-Unblock-File -Path "C:\Program Files\dsl\uninstall\uninstall.ps1"
+
 
 $jsonPath = "C:\Program Files\dsl\install\config.json"
 if (!(Test-Path $jsonPath)) {

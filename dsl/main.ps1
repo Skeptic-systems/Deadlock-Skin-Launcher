@@ -2,6 +2,9 @@
 import-module "C:\Program Files\dsl\install\args.psm1"
 #import-module
 #import-module
+Unblock-File -Path "C:\Program Files\dsl\install\install.ps1"
+Unblock-File -Path "C:\Program Files\dsl\main.ps1"
+Unblock-File -Path "C:\Program Files\dsl\uninstall\uninstall.ps1"
 do {
 clear-host
 write-host @"
