@@ -43,13 +43,22 @@ function Save-Charlist {
         [Parameter(Mandatory=$true)]
         [string]$inspectlink
     )
-    if (!($FilePath)) {
+    if (!(test-path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
-    }
-    $data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
-    if (-not $data) {
         $data = @()
     }
+    else {
+    $data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
+    }
+   
+    #if (!(test-path $FilePath)) {
+    #    New-Item -Path $FilePath -ItemType File -Force | Out-Null
+    #}
+    #$data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
+    #if (-not $data) {
+    #    $data = @()
+    #}
+    
     $entry = [PSCustomObject]@{
         ClassName   = $ClassName
         FileName    = $FileName
@@ -66,7 +75,7 @@ function Get-Charlist {
     param(
         [string]$FilePath = "C:\Program Files\dsl\install\charlist.json"
     )
-    if (!($FilePath)) {
+    if (!(test-path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
     }
         $data = Get-Content $FilePath -Raw | ConvertFrom-Json
@@ -79,7 +88,7 @@ function Get-Classname {
         [Parameter(Mandatory = $true)]
         [string]$ClassName
     )
-    if (!($FilePath)) {
+    if (!(test-path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
     }
     $charlist = Get-Content $FilePath -Raw | ConvertFrom-Json
@@ -96,7 +105,7 @@ function Remove-Charlist {
         [Parameter(Mandatory=$true)]
         [string]$FileName
     )
-    if (!($FilePath)) {
+    if (!(test-path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
     }
     $data = Get-Content $FilePath -Raw | ConvertFrom-Json
