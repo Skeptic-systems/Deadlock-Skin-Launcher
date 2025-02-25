@@ -23,7 +23,7 @@ if (!(Test-Path "C:\Program Files\dsl")) {
     mkdir "C:\Program Files\dsl" -Force | Out-Null
     $zipFile = "$env:TEMP\Deadlock-Skin-Launcher.zip"
     $destinationFolder = "C:\Program Files\dsl"
-    Invoke-WebRequest -Uri "https://github.com/Skeptic-systems/Deadlock-Skin-Launcher/archive/refs/heads/main.zip" -OutFile $zipFile
+    Invoke-WebRequest -Uri "https://github.com/Skeptic-systems/Deadlock-Skin-Launcher/archive/refs/heads/main.zip" -OutFile $zipFile -ErrorAction SilentlyContinue
     Expand-Archive -Path $zipFile -DestinationPath $destinationFolder -Force
     $sourceDsl = Join-Path $destinationFolder "Deadlock-Skin-Launcher-main\dsl"
     Get-ChildItem -Path $sourceDsl | ForEach-Object {
@@ -35,16 +35,13 @@ if (!(Test-Path "C:\Program Files\dsl")) {
 
 
 $jsonPath = "C:\Program Files\dsl\install\config.json"
-
 if (-not (Test-Path $jsonPath)) {
     New-Item -Path $jsonPath -ItemType File -Force | Out-Null
 }
-
 # Konfiguration laden oder leeres Objekt erstellen.
 $config = if (Test-Path $jsonPath) {
     Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
 }
-
 if (-not $config.installpath) {
     $defaultPath = "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel"
     
