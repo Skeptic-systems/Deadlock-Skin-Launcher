@@ -10,13 +10,6 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 
-
-
-
-
-
-
-# Test Deadlock Path
 # Wenn Dsl noch nicht installiert ist
 if (!(Test-Path "C:\Program Files\dsl")) {
     # Initial Download
@@ -33,7 +26,6 @@ if (!(Test-Path "C:\Program Files\dsl")) {
     Remove-Item $zipFile -Force -ErrorAction SilentlyContinue
 }
 
-
 $jsonPath = "C:\Program Files\dsl\install\config.json"
 
 # Falls die JSON-Datei noch nicht existiert, erstellen.
@@ -42,10 +34,10 @@ if (-not (Test-Path $jsonPath)) {
 }
 
 # JSON-Inhalt laden
-$jsonContent = Get-Content -Path $jsonPath -Raw
+$jsonContent = Get-Content -Path $jsonPath -Raw -ErrorAction SilentlyContinue
 
-# Wenn die Datei leer ist, ein leeres, geordnetes Objekt erstellen.
-if ($jsonContent.Trim() -eq "") {
+# Wenn die Datei leer oder null ist, ein leeres, geordnetes Objekt erstellen.
+if (-not $jsonContent -or $jsonContent.Trim() -eq "") {
     $config = [ordered]@{}
 } else {
     $config = $jsonContent | ConvertFrom-Json
@@ -78,13 +70,10 @@ if (-not $config.installpath) {
     
     # Konfiguration abspeichern.
     $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
-
-    $Null = Read-host
     & "C:\Program Files\dsl\main.ps1"
 } else {
     Write-Output $config.installpath
 }
-
 
 
 
@@ -94,22 +83,18 @@ if (-not $config.installpath) {
     #if (Test-Path $installPath) {
     #    Remove-Item "$installPath\*" -Recurse -Force
     #}
-    
 
 
-    $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
-    $version = $configObject.version
+    # Pfad zur JSON-Datei
+    # $config = Get-Content -Path "C:\Program Files\dsl\install\config.json" -Raw | ConvertFrom-Json
+    # $config.version = "2.0.0"
+    # $config | ConvertTo-Json -Depth 10 | Set-Content "C:\Program Files\dsl\install\config.json"
+    # $jsonPath = "C:\Program Files\dsl\install\config.json"
+    # $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+    # $version = $configObject.version
 
-# Versions-Update in der JSON (von 1.0.0 auf 2.0.0)
-#if ($version -eq "1.0.0") {
-# Pfad zur JSON-Datei
-#$config = Get-Content -Path "C:\Program Files\dsl\install\config.json" -Raw | ConvertFrom-Json
-#$config.version = "2.0.0"
-#$config | ConvertTo-Json -Depth 10 | Set-Content "C:\Program Files\dsl\install\config.json"
-#}
-#$jsonPath = "C:\Program Files\dsl\install\config.json"
-#$configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
-#$version = $configObject.version
+    # $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
+    # $version = $configObject.version
 
 
 if ($version -eq "2.0.0") {
