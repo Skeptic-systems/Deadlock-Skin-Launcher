@@ -35,8 +35,8 @@ write-Host @"
 [1] Abrams
 [2] Bebop
 [3] Dynamo
-[4] Grey Talon
-[5] Haze
+[4] Grey Talon (new)
+[5] Haze (new)
 [6] Infernus
 [7] Ivy
 [8] Kelvin
@@ -49,12 +49,13 @@ write-Host @"
 [15] Pocket
 [16] Seven
 [17] Shiv
-[18] Vindicta
+[18] Vindicta (new)
 [19] Viper
 [20] Viscous
 [21] Warden
 [22] Wraith
-[23] Yamato
+[23] Yamato (new)
+[24] Holiday (new)
 "@
         Write-Host "`n"
         write-host " > " -NoNewline -ForegroundColor cyan
@@ -105,7 +106,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Minecraft Skeleton" -Display2 "[2] Svoi"  -Inspectlink1 "https://gamebanana.com/mods/563116" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/greytalon/MinecraftSkeleton.zip" -Inspectlink2 "https://gamebanana.com/mods/556396" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/greytalon/Svoi.zip"
+                install-skin -Display1 "[1] Minecraft Skeleton (new)" -Display2 "[2] Svoi"  -Inspectlink1 "https://gamebanana.com/mods/563116" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/greytalon/MinecraftSkeleton.zip" -Inspectlink2 "https://gamebanana.com/mods/556396" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/greytalon/Svoi.zip"
                 }
             }
             5 {
@@ -117,7 +118,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Haze2.0" -Display2 "[2] Helltorn" -Display3 "[3] Voidwalker" -Inspectlink1 "https://gamebanana.com/mods/561867" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/haze/Haze2.0.zip" -Inspectlink2 "https://gamebanana.com/mods/557963" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/haze/Helltorn.zip" -Inspectlink3 "https://gamebanana.com/mods/562592" -Downloadlink3 "https://skeptic-systems.de/data/deadlock/haze/Voidwalker.zip"
+                install-skin -Display1 "[1] Haze2.0" -Display2 "[2] Helltorn" -Display3 "[3] Voidwalker (new)" -Inspectlink1 "https://gamebanana.com/mods/561867" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/haze/Haze2.0.zip" -Inspectlink2 "https://gamebanana.com/mods/557963" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/haze/Helltorn.zip" -Inspectlink3 "https://gamebanana.com/mods/562592" -Downloadlink3 "https://skeptic-systems.de/data/deadlock/haze/Voidwalker.zip"
             }
             }
             6 {
@@ -273,7 +274,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Bikinidicta" -Display2 "[2] Widowmaker"  -Inspectlink1 "https://gamebanana.com/mods/554012" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/vindicta/Bikinidicta.zip" -Inspectlink2 "https://gamebanana.com/mods/559218" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/vindicta/Widowmaker.zip"
+                install-skin -Display1 "[1] Bikinidicta (new)" -Display2 "[2] Widowmaker"  -Inspectlink1 "https://gamebanana.com/mods/554012" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/vindicta/Bikinidicta.zip" -Inspectlink2 "https://gamebanana.com/mods/559218" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/vindicta/Widowmaker.zip"
                 }
             }
             19 {
@@ -333,7 +334,19 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] 2B" -Display2 "[2] Mythrato" -Display3 "[3] Raiden" -Inspectlink1 "https://gamebanana.com/mods/569650" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/yamato/2b.zip" -Inspectlink2 "https://gamebanana.com/mods/556418" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/yamato/Mythrato.zip" -Inspectlink3 "https://gamebanana.com/mods/559345" -Downloadlink3 "https://skeptic-systems.de/data/deadlock/yamato/Raiden.zip" 
+                install-skin -Display1 "[1] 2B (new)" -Display2 "[2] Mythrato" -Display3 "[3] Raiden (new)" -Inspectlink1 "https://gamebanana.com/mods/569650" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/yamato/2b.zip" -Inspectlink2 "https://gamebanana.com/mods/556418" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/yamato/Mythrato.zip" -Inspectlink3 "https://gamebanana.com/mods/559345" -Downloadlink3 "https://skeptic-systems.de/data/deadlock/yamato/Raiden.zip" 
+                }
+            }
+            24 {
+                $skinName = Get-Classname -ClassName "holiday"
+                if ($skinName) {
+                    Write-Host "There is already a skin for Yamato installed." -ForegroundColor Red
+                    Write-Host "The Skin is: $skinName" -ForegroundColor Red
+                    $validinput = $false
+                    Start-Sleep -Seconds 3
+                }
+                else {
+                install-skin -Display1 "[1] Ocelot (new)" -Inspectlink1 "https://gamebanana.com/mods/557591" -Downloadlink1 "https://skeptic-systems.de/data/holiday/yamato/Ocelot.zip"
                 }
             }
             "e" {
