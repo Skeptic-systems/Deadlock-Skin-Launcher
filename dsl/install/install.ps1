@@ -56,6 +56,7 @@ write-Host @"
 [22] Wraith
 [23] Yamato (new)
 [24] Holiday (new)
+[e] To go back
 "@
         Write-Host "`n"
         write-host " > " -NoNewline -ForegroundColor cyan
@@ -346,7 +347,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Ocelot (new)" -Inspectlink1 "https://gamebanana.com/mods/557591" -Downloadlink1 "https://skeptic-systems.de/data/holiday/yamato/Ocelot.zip"
+                install-skin -Display1 "[1] Ocelot (new)" -Inspectlink1 "https://gamebanana.com/mods/557591" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/holiday/Ocelot.zip"
                 }
             }
             "e" {

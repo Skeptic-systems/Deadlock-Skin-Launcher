@@ -1,4 +1,3 @@
-#gameinfo.gi anpassen 
 clear-host
 write-host @"
     ____                 ____           __      _____ __   _          __                           __             
@@ -10,7 +9,7 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 
-# Wenn Dsl noch nicht installiert ist
+# DSL install über Github
 if (!(Test-Path "C:\Program Files\dsl")) {
     # Initial Download
     mkdir "C:\Program Files\dsl" -Force | Out-Null
@@ -24,8 +23,11 @@ if (!(Test-Path "C:\Program Files\dsl")) {
     }
     Remove-Item -Path (Join-Path $destinationFolder "Deadlock-Skin-Launcher-main") -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item $zipFile -Force -ErrorAction SilentlyContinue
+    $trigger = $false
 }
 
+
+# Wird für die folgende Installpath Abfrage gebraucht
 $jsonPath = "C:\Program Files\dsl\install\config.json"
 
 # Falls die JSON-Datei noch nicht existiert, erstellen.
@@ -53,6 +55,7 @@ if (-not $config.installpath) {
             New-Item -Path $installDir -ItemType Directory | Out-Null
         }
         Remove-Item "$installDir\*" -Recurse -Force
+        
         $config.version = "1.0.0"
         $config.installpath = $installDir
     } else {
@@ -72,6 +75,32 @@ if (-not $config.installpath) {
     
     # Konfiguration abspeichern.
     $config | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
+
+    # Gameinfo.gi mit den entsprechenden Werten abspeichern
+    # Der Trigger wird aus dem Onetime case von oben benutzt
+    if ($trigger -eq $false){
+        $parentPath = Split-Path $installDir -Parent
+        $newPath = Join-Path $parentPath "gameinfo.gi"
+        $content = Get-Content -Path $newPath -Raw
+        $pattern = "\{\s*Game\s+citadel\s*\r?\n\s*Game\s+core\s*\r?\n\s*\}"
+        $replacement = @'
+{  
+    Game                citadel/addons
+    Mod                 citadel
+    Write               citadel          
+    Game                citadel
+    Write               core
+    Mod                 core
+    Game                core        
+}
+'@
+        if ([regex]::IsMatch($content, $pattern, [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
+            $newContent = [regex]::Replace($content, $pattern, $replacement, [System.Text.RegularExpressions.RegexOptions]::Singleline)
+            Set-Content -Path $newPath -Value $newContent
+        }
+    }
+
+    # Übergabe an die main Datei
     & "C:\Program Files\dsl\main.ps1"
 }
 
@@ -87,13 +116,15 @@ if (-not $config.installpath) {
     # $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
     # $version = $configObject.version
 
-
+# Versionierung
 if ($version -eq "2.0.0") {
     Write-Host "Lade neue Dateien für Version 2.0.0 nach..." -ForegroundColor Cyan
 }
+# Versionierung
 elseif ($version -eq "3.0.0") {
     Write-Host "Lade neue Dateien für Version 3.0.0 nach..." -ForegroundColor Cyan
 }
+# Versionierung
 else {
     & "C:\Program Files\dsl\main.ps1"
 }

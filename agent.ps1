@@ -9,4 +9,5 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 Write-Host "Connecting ..." -ForegroundColor Green
-iwr -useb "https://raw.githubusercontent.com/Skeptic-systems/Deadlock-Skin-Launcher/refs/heads/main/assembler.ps1" | iex
+# Herunterladen und ausführen der Datei
+Invoke-WebRequest -useb "https://raw.githubusercontent.com/Skeptic-systems/Deadlock-Skin-Launcher/refs/heads/main/assembler.ps1" | Invoke-Expression

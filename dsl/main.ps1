@@ -35,13 +35,11 @@ switch($caseInput){
         $validinput = $true 
     }            
     3 {
-        Write-Host "This Case is work in progress" -ForegroundColor Red
-        start-sleep -Seconds 2
+        & "C:\Program Files\dsl\fix\fix.ps1"
         $validinput = $true 
     }            
     4 {
-        Write-Host "This Case is work in progress" -ForegroundColor Red
-        start-sleep -Seconds 2
+        & "C:\Program Files\dsl\uninstall\dsl\uninstall.ps1"
         $validinput = $true
     }        
     default {
