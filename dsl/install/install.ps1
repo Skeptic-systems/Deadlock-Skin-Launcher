@@ -203,7 +203,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Mirage Reaper (new)" -Inspectlink1 "https://gamebanana.com/mods/575956" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/mirrage/MirageReaper.zip"
+                install-skin -Display1 "[1] Mirage Reaper (new)" -Inspectlink1 "https://gamebanana.com/mods/575956" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/mirage/MirageReaper.zip"
                 }
             }
             13 {
