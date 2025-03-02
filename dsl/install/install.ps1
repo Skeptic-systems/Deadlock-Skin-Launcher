@@ -43,7 +43,7 @@ write-Host @"
 [9] Lady Geist
 [10] Lash
 [11] McGinnis
-[12] Mirage
+[12] Mirage (new)
 [13] Mo and Krill
 [14] Paradox
 [15] Pocket
@@ -203,7 +203,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Mirage Reaper" -Inspectlink1 "https://gamebanana.com/mods/575956" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/mirrage/MirageReaper.zip"
+                install-skin -Display1 "[1] Mirage Reaper (new)" -Inspectlink1 "https://gamebanana.com/mods/575956" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/mirrage/MirageReaper.zip"
                 }
             }
             13 {
