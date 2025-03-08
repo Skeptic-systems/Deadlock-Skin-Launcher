@@ -37,22 +37,22 @@ write-Host @"
 [3] Dynamo
 [4] Grey Talon (new)
 [5] Haze (new)
-[6] Infernus
+[6] Infernus (new)
 [7] Ivy
 [8] Kelvin
 [9] Lady Geist
-[10] Lash
+[10] Lash (new)
 [11] McGinnis
 [12] Mirage (new)
 [13] Mo and Krill
 [14] Paradox
 [15] Pocket
-[16] Seven
+[16] Seven (new)
 [17] Shiv
 [18] Vindicta (new)
 [19] Viper
 [20] Viscous
-[21] Warden
+[21] Warden (new)
 [22] Wraith
 [23] Yamato (new)
 [24] Holiday (new)
@@ -131,7 +131,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Scoutfernus" -Inspectlink1 "https://gamebanana.com/mods/554396" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/infernus/Scoutfernus.zip"
+                install-skin -Display1 "[1] Scoutfernus" -Display2 "[2] Tommy" -Inspectlink1 "https://gamebanana.com/mods/554396" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/infernus/Scoutfernus.zip" -Inspectlink2 "https://gamebanana.com/mods/579911" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/infernus/tommy.zip"
                 }
             }
             7 {
@@ -179,7 +179,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Megalo Don Lash" -Display2 "[2] Saxton"  -Inspectlink1 "https://gamebanana.com/mods/558856" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/lash/MegaloDonLash.zip" -Inspectlink2 "https://gamebanana.com/mods/555227" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/lash/Saxton.zip"
+                install-skin -Display1 "[1] Megalo Don Lash" -Display2 "[2] Saxton" -Display3 "[2] Dudley (new)" -Inspectlink1 "https://gamebanana.com/mods/558856" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/lash/MegaloDonLash.zip" -Inspectlink2 "https://gamebanana.com/mods/555227" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/lash/Saxton.zip" -Inspectlink3 "https://gamebanana.com/mods/579523" -Downloadlink3 "https://skeptic-systems.de/data/deadlock/lash/Dudley"
                 }
             }
             11 {
@@ -251,7 +251,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Raiden" -Inspectlink1 "https://gamebanana.com/mods/564236" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/seven/Raiden.zip"
+                install-skin -Display1 "[1] Raiden" -Display2 "[1] Tommy" -Inspectlink1 "https://gamebanana.com/mods/564236" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/seven/Raiden.zip" -Inspectlink2 "https://gamebanana.com/mods/579911" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/seven/tommy.zip"
                 }
             }
             17 {
@@ -311,7 +311,7 @@ write-Host @"
                     Start-Sleep -Seconds 3
                 }
                 else {
-                install-skin -Display1 "[1] Feral Warden" -Inspectlink1 "https://gamebanana.com/mods/572702" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/warden/FeralWarden.zip"
+                install-skin -Display1 "[1] Feral Warden" -Display2 "[2] Tommy" -Inspectlink1 "https://gamebanana.com/mods/572702" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/warden/FeralWarden.zip" -Inspectlink2 "https://gamebanana.com/mods/579911" -Downloadlink2 "https://skeptic-systems.de/data/deadlock/warden/tommy.zip"
                 }
             }
             22 {
@@ -359,9 +359,37 @@ write-Host @"
         }
     }            
     2 { 
-        & "C:\Program Files\dsl\main.ps1"
-        $validinput = $true 
-    }
+        $validinput = $true
+        clear-host
+        write-host @"
+    ____                 ____           __      _____ __   _          __                           __             
+   / __ \___  ____ _____/ / /___  _____/ /__   / ___// /__(_)___     / /   ____ ___  ______  _____/ /_  ___  _____
+  / / / / _ \/ __  / __  / / __ \/ ___/ //_/   \__ \/ //_/ / __ \   / /   / __  / / / / __ \/ ___/ __ \/ _ \/ ___/
+ / /_/ /  __/ /_/ / /_/ / / /_/ / /__/ ,<     ___/ /  < / / / / /  / /___/ /_/ / /_/ / / / / /__/ / / /  __/ /    
+/_____/\___/\__,_/\__,_/_/\____/\___/_/|_|   /____/_/|_/_/_/ /_/  /_____/\__,_/\__,_/_/ /_/\___/_/ /_/\___/_/     
+"@ -ForegroundColor Green
+        write-host "by Skeptic" -ForegroundColor Cyan
+        Write-Host "`n`n`n"
+        write-Host @"
+[1] Fart Sound
+[e] To go back
+"@
+
+        Write-Host "`n"
+        write-host " > " -NoNewline -ForegroundColor cyan
+        $assetinput = Read-Host
+            switch ($assetinput) {
+            
+                1 {
+                    install-skin -Display1 "[1] Fart" -Inspectlink1 "https://gamebanana.com/mods/560795" -Downloadlink1 "https://skeptic-systems.de/data/deadlock/assets/fart.zip"
+                    }
+                default {
+                    & "C:\Program Files\dsl\install\install.ps1"
+                }
+                "e" {
+                   & "C:\Program Files\dsl\install\install.ps1"
+                }
+}}
     "e" {
         & "C:\Program Files\dsl\main.ps1"
     }    

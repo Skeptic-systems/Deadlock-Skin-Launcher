@@ -43,22 +43,16 @@ function Save-Charlist {
         [Parameter(Mandatory=$true)]
         [string]$inspectlink
     )
-    if (!(test-path $FilePath)) {
+
+    if (!(Test-Path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
         $data = @()
     }
     else {
-    $data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
+        $data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
     }
-   
-    #if (!(test-path $FilePath)) {
-    #    New-Item -Path $FilePath -ItemType File -Force | Out-Null
-    #}
-    #$data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
-    #if (-not $data) {
-    #    $data = @()
-    #}
-    
+    $data = $data | Where-Object { $_.FileName -ne $FileName }
+
     $entry = [PSCustomObject]@{
         ClassName   = $ClassName
         FileName    = $FileName
@@ -69,6 +63,7 @@ function Save-Charlist {
     $data += $entry
     $data | ConvertTo-Json -Depth 3 | Out-File -FilePath $FilePath -Force
 }
+
 
 function Get-Charlist {
     [CmdletBinding()]
