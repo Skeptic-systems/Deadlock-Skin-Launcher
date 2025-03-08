@@ -43,14 +43,20 @@ function Save-Charlist {
         [Parameter(Mandatory=$true)]
         [string]$inspectlink
     )
-
     if (!(Test-Path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
         $data = @()
     }
     else {
-        $data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
+        $data = Get-Content $FilePath -Raw | ConvertFrom-Json
+        if ($null -eq $data) {
+            $data = @()
+        }
+        elseif ($data -isnot [System.Collections.IEnumerable]) {
+            $data = @($data)
+        }
     }
+
     $data = $data | Where-Object { $_.FileName -ne $FileName }
 
     $entry = [PSCustomObject]@{
@@ -60,9 +66,11 @@ function Save-Charlist {
         isinstalled = $isinstalled
         inspectlink = $inspectlink
     }
+
     $data += $entry
     $data | ConvertTo-Json -Depth 3 | Out-File -FilePath $FilePath -Force
 }
+
 
 
 function Get-Charlist {
