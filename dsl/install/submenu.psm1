@@ -81,7 +81,7 @@ function Install-detail {
                 $skinName = $skinName.Substring(0,1).ToUpper() + $skinName.Substring(1)
 
                 # Eintrag in die json Datei
-                Save-Charlist -ClassName $className -FileName $Filename -SkinName $skinName -isinstalled $true -inspectlink $Inspectlink
+                Save-Charlist -ClassName $className -FileName $Filename -SkinName $skinName -inspectlink $Inspectlink
                 
                 # Erfolgreiche Ausgabe
                 $skinPath = Join-Path -Path $InstallPath -ChildPath $Filename
