@@ -31,7 +31,7 @@ function Get-Config {
 function Save-Charlist {
     [CmdletBinding()]
     param(
-        [string]$FilePath = "C:\Program Files\dsl\install\charlist.json",
+        [string]$FilePath = "C:\Program Files\dsl\install\config.json",
         [Parameter(Mandatory=$true)]
         [string]$ClassName,
         [Parameter(Mandatory=$true)]
@@ -39,34 +39,22 @@ function Save-Charlist {
         [Parameter(Mandatory=$true)]
         [string]$SkinName,
         [Parameter(Mandatory=$true)]
-        [bool]$isinstalled,
-        [Parameter(Mandatory=$true)]
         [string]$inspectlink
     )
-    if (!(Test-Path $FilePath)) {
-        New-Item -Path $FilePath -ItemType File -Force | Out-Null
+    if (-not (Test-Path $FilePath)) {
         $data = @()
     }
     else {
-        $data = Get-Content $FilePath -Raw | ConvertFrom-Json
-        if ($null -eq $data) {
-            $data = @()
-        }
-        elseif ($data -isnot [System.Collections.IEnumerable]) {
-            $data = @($data)
-        }
+        $data = @(Get-Content $FilePath -Raw | ConvertFrom-Json)
     }
-
-    $data = $data | Where-Object { $_.FileName -ne $FileName }
-
+    $data = @($data)
+    $data = @($data | Where-Object { $_.FileName -ne $FileName })
     $entry = [PSCustomObject]@{
         ClassName   = $ClassName
         FileName    = $FileName
         SkinName    = $SkinName
-        isinstalled = $isinstalled
         inspectlink = $inspectlink
     }
-
     $data += $entry
     $data | ConvertTo-Json -Depth 3 | Out-File -FilePath $FilePath -Force
 }
