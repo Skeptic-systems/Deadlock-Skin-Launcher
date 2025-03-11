@@ -31,11 +31,7 @@ function Get-Config {
 function Save-Charlist {
     [CmdletBinding()]
     param(
-<<<<<<< HEAD:dsl/public/args.psm1
         [string]$FilePath = "C:\Program Files\dsl\public\config.json",
-=======
-        [string]$FilePath = "C:\Program Files\dsl\install\config.json",
->>>>>>> 35c91a5787ff7ad9d09426644846ebb35c052d43:dsl/install/args.psm1
         [Parameter(Mandatory=$true)]
         [string]$ClassName,
         [Parameter(Mandatory=$true)]
