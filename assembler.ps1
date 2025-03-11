@@ -62,7 +62,7 @@ if (-not $config.installpath) {
         # Standardpfad existiert nicht – Benutzer eingeben lassen.
         do {
             $userInput = Read-Host "Bitte Pfad eingeben (Pfad muss 'steamapps\common\Deadlock\game\citadel' enthalten)"
-        } until (Test-Path $userInput -and $userInput -like "*steamapps\common\Deadlock\game\citadel*")
+        } until ((Test-Path $userInput) -and ($userInput -like "*steamapps\common\Deadlock\game\citadel*"))
         
         $installDir = Join-Path $userInput "addons"
         if (-not (Test-Path $installDir)) {
