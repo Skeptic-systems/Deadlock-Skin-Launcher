@@ -93,7 +93,7 @@ function Install-detail {
                     write-host "The skin could not be installed" -ForegroundColor Red
                 }
                 start-sleep -Seconds 2
-
+                & "C:\Program Files\dsl\install\skinsubmenu.ps1"
             }
             "e" {
                 & "C:\Program Files\dsl\install\skinmenu.ps1"
