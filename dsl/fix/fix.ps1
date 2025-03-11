@@ -9,7 +9,7 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 write-Host "Fixing ..."
-$jsonPath = "C:\Program Files\dsl\install\config.json"
+$jsonPath = "C:\Program Files\dsl\public\config.json"
 
 # Übersetzen und importieren des Pfades für die gameinfo.gi
 $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
@@ -18,7 +18,7 @@ $parentPath = Split-Path $installpath -Parent
 $newPath = Join-Path $parentPath "gameinfo.gi"
 
 # Pattern vergleich 
-$content = Get-Content -Path "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel\gameinfo.gi" -Raw
+$content = Get-Content -Path "$newPath" -Raw
 $pattern = "\{\s*Game\s+citadel\s*\r?\n\s*Game\s+core\s*\r?\n\s*\}"
 $replacement = @'
 {  
@@ -35,16 +35,16 @@ $replacement = @'
 # Setzen des Wertes, wenn das Pattern matcht
 if ([regex]::IsMatch($content, $pattern, [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
     $newContent = [regex]::Replace($content, $pattern, $replacement, [System.Text.RegularExpressions.RegexOptions]::Singleline)
-    Set-Content -Path "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel\gameinfo.gi" -Value $newContent
+    Set-Content -Path "$newPath" -Value $newContent
     write-Host "addons modification was applied" -ForegroundColor Green
 }
 # Ansonsten öffen von Vscode oder notpad
 else {
     write-Host "The pattern does not match in the file, please check the file" -ForegroundColor Red
     if (Get-Command code -ErrorAction SilentlyContinue) {
-        code "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel\gameinfo.gi"
+        code "$newPath"
     } else {
-        notepad "C:\Program Files (x86)\Steam\steamapps\common\Deadlock\game\citadel\gameinfo.gi"
+        notepad "$newPath"
     }
 
 }

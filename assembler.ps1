@@ -28,7 +28,7 @@ if (!(Test-Path "C:\Program Files\dsl")) {
 
 
 # Wird für die folgende Installpath Abfrage gebraucht
-$jsonPath = "C:\Program Files\dsl\install\config.json"
+$jsonPath = "C:\Program Files\dsl\public\config.json"
 
 # Falls die JSON-Datei noch nicht existiert, erstellen.
 if (-not (Test-Path $jsonPath)) {
@@ -106,10 +106,10 @@ if (-not $config.installpath) {
 
 
     # Pfad zur JSON-Datei
-    # $config = Get-Content -Path "C:\Program Files\dsl\install\config.json" -Raw | ConvertFrom-Json
+    # $config = Get-Content -Path "C:\Program Files\dsl\public\config.json" -Raw | ConvertFrom-Json
     # $config.version = "2.0.0"
-    # $config | ConvertTo-Json -Depth 10 | Set-Content "C:\Program Files\dsl\install\config.json"
-    # $jsonPath = "C:\Program Files\dsl\install\config.json"
+    # $config | ConvertTo-Json -Depth 10 | Set-Content "C:\Program Files\dsl\public\config.json"
+    # $jsonPath = "C:\Program Files\dsl\public\config.json"
     # $configObject = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
     # $version = $configObject.version
 

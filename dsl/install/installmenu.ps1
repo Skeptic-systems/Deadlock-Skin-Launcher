@@ -1,6 +1,4 @@
-Unblock-File -Path "C:\Program Files\dsl\install\install.ps1" | Out-Null
-Unblock-File -Path "C:\Program Files\dsl\main.ps1" | Out-Null
-Unblock-File -Path "C:\Program Files\dsl\uninstall\uninstall.ps1" | Out-Null
+$validinput = $true
 do {
 clear-host
 write-host @"
@@ -12,30 +10,24 @@ write-host @"
 "@ -ForegroundColor Green
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
+write-host "[1] Install Skin"
+write-host "[2] Install Asset"
 
-write-host "[1] Install Assets" -ForegroundColor Yellow
-Write-Host "[2] List or uninstall Assets" -ForegroundColor Blue
-Write-Host "[3] Fix DSL" -ForegroundColor Magenta
-Write-Host "[4] Uninstall DSL" -ForegroundColor Gray
-write-host ""
 write-host " > " -NoNewline -ForegroundColor cyan
-
 $caseInput = Read-Host
-switch($caseInput){                    
+switch($caseInput){        
     1 {
-        & "C:\Program Files\dsl\install\installmenu.ps1"
+        & "C:\Program Files\dsl\install\skinmenu.ps1"
     }            
     2 { 
-        & "C:\Program Files\dsl\uninstall\uninstall.ps1"
-    }            
-    3 {
-        & "C:\Program Files\dsl\fix\fix.ps1"
-    }            
-    4 {
-        & "C:\Program Files\dsl\uninstall\dsl\uninstall.ps1"
-    }        
+        & "C:\Program Files\dsl\install\assetmenu.ps1"
+    }
+    "e" {
+        & "C:\Program Files\dsl\main.ps1"
+    }    
     default {
-        write-host "wrong case input"
+        write-host "Wrong Case input" -ForegroundColor Red
+        start-sleep -seconds 2
         $validinput = $false
     }            
 }

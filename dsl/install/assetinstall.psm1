@@ -1,5 +1,6 @@
-import-module "C:\Program Files\dsl\install\args.psm1"
-function Install-detail {
+import-module "C:\Program Files\dsl\public\args.psm1"
+###
+function Install-asset {
     param (
         [string]$Display,
         [string]$Inspectlink,
@@ -7,7 +8,7 @@ function Install-detail {
     )
     $Filtereddisplay = $Display -replace '^\[\d+\]\s*',''
     do {
-        clear-host
+    clear-host
     write-host @"
     ____                 ____           __      _____ __   _          __                           __             
    / __ \___  ____ _____/ / /___  _____/ /__   / ___// /__(_)___     / /   ____ ___  ______  _____/ /_  ___  _____
@@ -19,8 +20,8 @@ function Install-detail {
     Write-Host "`n`n`n"
     Write-Host "$Filtereddisplay"
     Write-Host "`n"
-    Write-Host "[i] Inspect the skin"
-    Write-Host "[d] Download and install the Skin"
+    Write-Host "[i] Inspect the Asset"
+    Write-Host "[d] Download and install the Asset"
     Write-Host "[e] To go back"
 
 
@@ -34,7 +35,7 @@ function Install-detail {
             "d" {
                 # Mit Debuggen
                 Write-Host "Downloading"
-                $jsonPath = "C:\Program Files\dsl\install\config.json"
+                $jsonPath = "C:\Program Files\dsl\public\config.json"
                 $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
                 $installpath = $config.installpath
                 write-host "Installpath: $installpath"
@@ -86,16 +87,16 @@ function Install-detail {
                 # Erfolgreiche Ausgabe
                 $skinPath = Join-Path -Path $InstallPath -ChildPath $Filename
                 if (Test-path $skinPath) {
-                    Write-Host "Skin installed successfully" -ForegroundColor Green
+                    Write-Host "Asset installed successfully" -ForegroundColor Green
                 }
                 else {
-                    write-host "The skin could not be installed" -ForegroundColor Red
+                    write-host "The Asset could not be installed" -ForegroundColor Red
                 }
                 start-sleep -Seconds 2
 
             }
             "e" {
-                & "C:\Program Files\dsl\install\install.ps1"
+                & "C:\Program Files\dsl\install\skinmenu.ps1"
             }
             default {
                 Write-Host "Invalid input"
@@ -104,5 +105,4 @@ function Install-detail {
             }
         }
     }while ($validinput -eq $false)
-    & "C:\Program Files\dsl\install\install.ps1"
 }

@@ -1,5 +1,6 @@
-Import-Module "C:\Program Files\dsl\install\args.psm1"
+Import-Module "C:\Program Files\dsl\public\args.psm1"
 Import-Module "C:\Program Files\dsl\uninstall\subswitch.psm1"
+Import-Module "C:\Program Files\dsl\public\errorhandling.psm1"
 
 $validinput = $false
 
@@ -16,9 +17,18 @@ do {
     Write-Host "by Skeptic" -ForegroundColor Cyan
     Write-Host "`nThe following Skins are installed:" -ForegroundColor Yellow
     Write-Host ""
+    
+    # Error Handling
+    $jsonPath = "C:\Program Files\dsl\public\config.json"
+    $testpath = Test-Path $jsonPath -ErrorAction SilentlyContinue
+    $jsonContent = Get-Content $jsonPath -Raw -ErrorAction SilentlyContinue
+    
+    if (-Not (Test-Path $jsonPath) -or [string]::IsNullOrWhiteSpace((Get-Content $jsonPath -Raw))) {
+        Write-Host "There are no skins installed" -ForegroundColor Yellow
+        Show-ErrorMessage -title "File Not Found or Empty" -description "The configuration file is missing or is Empty" -debugvar1key "Path" -debugvar1value "$jsonPath" -debugvar2key "Path exists" -debugvar2value "$testpath" -debugvar3key "Json Content" -debugvar3value "$jsonContent" 
+    }
 
     # Ermittele Konfiguration und installierte Skins
-    $jsonPath = "C:\Program Files\dsl\install\config.json"
     $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
     $installpath = $config.installpath
     $fileNames = Get-ChildItem -Path "$installpath\" -File | ForEach-Object { $_.Name }

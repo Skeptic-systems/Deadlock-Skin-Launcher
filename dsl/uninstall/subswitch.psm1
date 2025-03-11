@@ -1,4 +1,4 @@
-Import-Module "C:\Program Files\dsl\install\args.psm1"
+Import-Module "C:\Program Files\dsl\public\args.psm1"
 function subswitch {
     [CmdletBinding()]
     param (
@@ -37,7 +37,7 @@ function subswitch {
             $validinput = $false
         }
         "d" {
-            $jsonPath = "C:\Program Files\dsl\install\config.json"
+            $jsonPath = "C:\Program Files\dsl\public\config.json"
             $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
             $installpath = $config.installpath
             write-host "$installpath"

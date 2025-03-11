@@ -1,6 +1,6 @@
-import-module "C:\Program Files\dsl\install\submenu.psm1"
-# Get Config
-
+import-module "C:\Program Files\dsl\install\skininstall.psm1"
+###
+$validinput = $true
 
 function install-skin {
     param (
@@ -88,9 +88,13 @@ Write-Host "`n`n`n"
             }
         }
         "e" {
-            & "C:\Program Files\dsl\install\install.ps1"
+            & "C:\Program Files\dsl\install\skinmenu.ps1"
         }
-        Default {}
+        Default {
+            write-host "Wrong Case Input" -ForegroundColor Red
+            start-sleep -Seconds 2
+            $validinput = $false
+        }
     }
-} while ($validinput)
+} while ($validinput -eq $false)
 }

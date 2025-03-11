@@ -1,3 +1,4 @@
+do {
 clear-host
 write-host @"
     ____                 ____           __      _____ __   _          __                           __             
@@ -9,7 +10,7 @@ write-host @"
 write-host "by Skeptic" -ForegroundColor Cyan
 Write-Host "`n`n`n"
 Write-Host "@
-Are you sure you want to uninstall DSL?
+Are you sure you want to uninstall dsl?
 
 
 [y] To uninstall dsl ans skins
@@ -22,7 +23,7 @@ switch ($caseinput){
     "y" {
         write-Host "Uninstall addons" -ForegroundColor Cyan
         # Load Installpath form configfile
-        $jsonPath = "C:\Program Files\dsl\install\config.json"
+        $jsonPath = "C:\Program Files\dsl\public\config.json"
         $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
         $installpath = $config.installpath
         Remove-Item "$installpath" -Recurse -Force
@@ -32,12 +33,14 @@ switch ($caseinput){
         Remove-Item "C:\Program Files\dsl" -Recurse -Force
         Write-Host "Uninstalled dsl succesfully" -ForegroundColor Green
         Start-Sleep -Seconds 2
+        $validinput = $false
     }
     "s" {
         Write-Host "Uninstalling dsl"
         Remove-Item "C:\Program Files\dsl" -Recurse -Force
         Start-Sleep -Seconds 2
         Write-Host "Uninstalled dsl succesfully" -ForegroundColor Green
+        $validinput = $false
     }
     "n" {
         & "C:\Program Files\dsl\main.ps1"
@@ -46,9 +49,9 @@ switch ($caseinput){
         & "C:\Program Files\dsl\main.ps1"
     }
     default {
-        Write-Host "Wrong input" -ForegroundColor Red
+        Write-Host "Wrong Case Input" -ForegroundColor Red
         Start-Sleep -Seconds 2
-        & "C:\Program Files\dsl\uninstall\dsl\uninstall.ps1"
+        $validinput = $false
     }
 }
-& "C:\Program Files\dsl\main.ps1"
+} while ($validinput -eq $false)

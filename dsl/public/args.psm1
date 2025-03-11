@@ -4,7 +4,7 @@ function Save-config {
         [string]$Key,
         [Parameter(Mandatory = $true)]
         [object]$Value,
-        [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
+        [string]$ConfigPath = "C:\Program Files\dsl\public\config.json"
     )
     if (Test-Path $ConfigPath) {
         $jsonData = Get-Content $ConfigPath -Raw | ConvertFrom-Json
@@ -20,7 +20,7 @@ function Save-config {
 
 function Get-Config {
     param(
-        [string]$ConfigPath = "C:\Program Files\dsl\install\config.json"
+        [string]$ConfigPath = "C:\Program Files\dsl\public\config.json"
     )
     $jsonContent = Get-Content -Path $ConfigPath -Raw
     $configObject = $jsonContent | ConvertFrom-Json
@@ -31,7 +31,11 @@ function Get-Config {
 function Save-Charlist {
     [CmdletBinding()]
     param(
+<<<<<<< HEAD:dsl/public/args.psm1
+        [string]$FilePath = "C:\Program Files\dsl\public\config.json",
+=======
         [string]$FilePath = "C:\Program Files\dsl\install\config.json",
+>>>>>>> 35c91a5787ff7ad9d09426644846ebb35c052d43:dsl/install/args.psm1
         [Parameter(Mandatory=$true)]
         [string]$ClassName,
         [Parameter(Mandatory=$true)]
@@ -64,7 +68,7 @@ function Save-Charlist {
 function Get-Charlist {
     [CmdletBinding()]
     param(
-        [string]$FilePath = "C:\Program Files\dsl\install\charlist.json"
+        [string]$FilePath = "C:\Program Files\dsl\public\charlist.json"
     )
     if (!(test-path $FilePath)) {
         New-Item -Path $FilePath -ItemType File -Force | Out-Null
@@ -75,7 +79,7 @@ function Get-Charlist {
 function Get-Classname {
     [CmdletBinding()]
     param(
-        [string]$FilePath = "C:\Program Files\dsl\install\charlist.json",
+        [string]$FilePath = "C:\Program Files\dsl\public\charlist.json",
         [Parameter(Mandatory = $true)]
         [string]$ClassName
     )
@@ -89,10 +93,28 @@ function Get-Classname {
     }
 }
 
+function Get-Skinname {
+    [CmdletBinding()]
+    param(
+        [string]$FilePath = "C:\Program Files\dsl\public\charlist.json",
+        [Parameter(Mandatory = $true)]
+        [string]$AssetName
+    )
+    if (!(Test-Path $FilePath)) {
+        New-Item -Path $FilePath -ItemType File -Force | Out-Null
+    }
+    $charlist = Get-Content $FilePath -Raw | ConvertFrom-Json
+    $entry = $charlist | Where-Object { $_.SkinName -eq $AssetName }
+    if ($entry) {
+        return $entry.SkinName
+    }
+}
+
+
 function Remove-Charlist {
     [CmdletBinding()]
     param(
-        [string]$FilePath = "C:\Program Files\dsl\install\charlist.json",
+        [string]$FilePath = "C:\Program Files\dsl\public\charlist.json",
         [Parameter(Mandatory=$true)]
         [string]$FileName
     )
