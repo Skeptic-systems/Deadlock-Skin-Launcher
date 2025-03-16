@@ -101,7 +101,8 @@ if (-not $config.installpath) {
     }
 
     # Übergabe an die main Datei
-    & "C:\Program Files\dsl\main.ps1"
+   $null = read-host
+    #& "C:\Program Files\dsl\main.ps1"
 }
 
 
@@ -126,5 +127,7 @@ elseif ($version -eq "3.0.0") {
 }
 # Versionierung
 else {
-    & "C:\Program Files\dsl\main.ps1"
+    write-host "else"
+    $null = read-host
+    #& "C:\Program Files\dsl\main.ps1"
 }
