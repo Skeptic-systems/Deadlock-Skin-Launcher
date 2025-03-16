@@ -101,8 +101,7 @@ if (-not $config.installpath) {
     }
 
     # Übergabe an die main Datei
-   $null = read-host
-    #& "C:\Program Files\dsl\main.ps1"
+    & "C:\Program Files\dsl\main.ps1"
 }
 
 
