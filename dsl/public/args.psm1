@@ -31,7 +31,7 @@ function Get-Config {
 function Save-Charlist {
     [CmdletBinding()]
     param(
-        [string]$FilePath = "C:\Program Files\dsl\public\config.json",
+        [string]$FilePath = "C:\Program Files\dsl\public\charlist.json",
         [Parameter(Mandatory=$true)]
         [string]$ClassName,
         [Parameter(Mandatory=$true)]

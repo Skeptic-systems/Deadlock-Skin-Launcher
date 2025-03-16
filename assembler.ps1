@@ -127,8 +127,5 @@ elseif ($version -eq "3.0.0") {
 }
 # Versionierung
 else {
-    write-host "else"
-    $null = read-host
     & "C:\Program Files\dsl\main.ps1"
-    $null = read-host
 }
