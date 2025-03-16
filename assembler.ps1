@@ -129,5 +129,6 @@ elseif ($version -eq "3.0.0") {
 else {
     write-host "else"
     $null = read-host
-    #& "C:\Program Files\dsl\main.ps1"
+    & "C:\Program Files\dsl\main.ps1"
+    write-host "else"
 }
