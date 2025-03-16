@@ -130,5 +130,5 @@ else {
     write-host "else"
     $null = read-host
     & "C:\Program Files\dsl\main.ps1"
-    write-host "else"
+    $null = read-host
 }
