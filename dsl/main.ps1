@@ -1,6 +1,3 @@
-Unblock-File -Path "C:\Program Files\dsl\install\install.ps1" | Out-Null
-Unblock-File -Path "C:\Program Files\dsl\main.ps1" | Out-Null
-Unblock-File -Path "C:\Program Files\dsl\uninstall\uninstall.ps1" | Out-Null
 do {
 clear-host
 write-host @"
