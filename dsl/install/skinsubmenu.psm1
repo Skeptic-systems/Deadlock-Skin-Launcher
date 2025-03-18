@@ -1,4 +1,5 @@
 import-module "C:\Program Files\dsl\install\skininstall.psm1"
+import-module "C:\Program Files\dsl\public\args.psm1"
 ###
 $validinput = $true
 
@@ -21,16 +22,16 @@ function install-skin {
         [string]$Downloadlink5
     )
 do{
-clear-host
-write-host @"
+    clear-host
+    write-host @"
     ____                 ____           __      _____ __   _          __                           __             
    / __ \___  ____ _____/ / /___  _____/ /__   / ___// /__(_)___     / /   ____ ___  ______  _____/ /_  ___  _____
   / / / / _ \/ __  / __  / / __ \/ ___/ //_/   \__ \/ //_/ / __ \   / /   / __  / / / / __ \/ ___/ __ \/ _ \/ ___/
  / /_/ /  __/ /_/ / /_/ / / /_/ / /__/ ,<     ___/ /  < / / / / /  / /___/ /_/ / /_/ / / / / /__/ / / /  __/ /    
 /_____/\___/\__,_/\__,_/_/\____/\___/_/|_|   /____/_/|_/_/_/ /_/  /_____/\__,_/\__,_/_/ /_/\___/_/ /_/\___/_/     
 "@ -ForegroundColor Green
-write-host "by Skeptic" -ForegroundColor Cyan
-Write-Host "`n`n`n"
+    write-host "by Skeptic" -ForegroundColor Cyan
+    Write-Host "`n`n`n"
     
     $isvalid1 = $false
     $isvalid2 = $false
@@ -64,33 +65,40 @@ Write-Host "`n`n`n"
     switch ($caseInput) {
         1 {
             if ($isvalid1) {
+                Write-Log -Message "User selected option 1. Installing detail for display: $Display1" -Level INFO
                 Install-detail -Display $Display1 -Inspectlink $Inspectlink1 -Downloadlink $Downloadlink1
-        }
+            }
         }
         2 {
             if ($isvalid2) {
+                Write-Log -Message "User selected option 2. Installing detail for display: $Display2" -Level INFO
                 Install-detail -Display $Display2 -Inspectlink $Inspectlink2 -Downloadlink $Downloadlink2
             }
         }
         3 {
             if ($isvalid3) {
+                Write-Log -Message "User selected option 3. Installing detail for display: $Display3" -Level INFO
                 Install-detail -Display $Display3 -Inspectlink $Inspectlink3 -Downloadlink $Downloadlink3
             }
         }
         4 {
             if ($isvalid4) {
+                Write-Log -Message "User selected option 4. Installing detail for display: $Display4" -Level INFO
                 Install-detail -Display $Display4 -Inspectlink $Inspectlink4 -Downloadlink $Downloadlink4
             }
         }
         5 {
             if ($isvalid5) {
+                Write-Log -Message "User selected option 5. Installing detail for display: $Display5" -Level INFO
                 Install-detail -Display $Display5 -Inspectlink $Inspectlink5 -Downloadlink $Downloadlink5
             }
         }
         "e" {
-            & "C:\Program Files\dsl\install\skinmenu.ps1"
+            Write-Log -Message "User selected 'e': Returning to skin menu" -Level INFO
+            & "C:\Program Files\dsl\install\skinmenu.psm1"
         }
         Default {
+            Write-Log -Message "Invalid input in skininstall submenu: $caseInput" -Level WARN
             write-host "Wrong Case Input" -ForegroundColor Red
             start-sleep -Seconds 2
             $validinput = $false

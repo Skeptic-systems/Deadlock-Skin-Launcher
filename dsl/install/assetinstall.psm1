@@ -1,4 +1,5 @@
 import-module "C:\Program Files\dsl\public\args.psm1"
+import-module "C:\Program Files\dsl\public\errorhandling.psm1"
 ###
 function Install-asset {
     param (
@@ -29,11 +30,27 @@ function Install-asset {
     $caseInput = Read-Host
         switch ($caseinput) {
             "i" {
+                Write-Log -Message "User selected 'Inspect the Asset' for display: $Filtereddisplay" -Level INFO
                 Start-Process $Inspectlink
                 $validinput = $false
             }
             "d" {
-                # Mit Debuggen
+                try {
+                    $response = Invoke-WebRequest -Uri $Downloadlink -Method Head -TimeoutSec 5 -ErrorAction Stop
+                    if ($response.StatusCode -ne 200) {
+                        Write-Log -Message "Link validation failed for $Downloadlink with status code: $($response.StatusCode)" -Level ERROR
+                        Write-Host "Der Download-Link ist ungültig, bitte wende dich an den Administrator" -ForegroundColor Red
+                        Show-ErrorMessage -title "Download Link is not valid" -description "Permission denied status 200" -debugvar1key "Downloadlink" -debugvar1value "$Downloadlink"
+                    }
+                    else {
+                        Write-Log -Message "Link validation succeeded for $Downloadlink" -Level INFO
+                    }
+                }
+                catch {
+                    Write-Log -Message "Link validation error for $Downloadlink" -Level ERROR
+                    Show-ErrorMessage -title "Download Link is not valid" -description "Download Link is not reachable" -debugvar1key "Downloadlink" -debugvar1value "$Downloadlink"
+                }
+                Write-Log -Message "Starting download for asset: $Filtereddisplay" -Level INFO
                 Write-Host "Downloading"
                 $jsonPath = "C:\Program Files\dsl\public\config.json"
                 $config = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
@@ -41,35 +58,37 @@ function Install-asset {
                 write-host "Installpath: $installpath"
                 Write-Host "Downloading ZIP file..."
                 Invoke-WebRequest "$Downloadlink" -OutFile "$env:TEMP\tmp.zip" -Verbose
-                if (!(Test-Path "$env:TEMP\tmp.zip")) { Write-Host "Der Link ist ungültig, bitte wende dich an den Administrator" }
+                if (!(Test-Path "$env:TEMP\tmp.zip")) { 
+                    Write-Log -Message "Download failed: $env:TEMP\tmp.zip not found for asset: $Filtereddisplay" -Level ERROR
+                    Write-Host "Der Download-Link ist ungültig, bitte wende dich an den Administrator"
+                    return
+                }
+                Write-Log -Message "Download succeeded for asset: $Filtereddisplay" -Level INFO
                 Write-Host "Download succeeded"
                 
+                Write-Log -Message "Starting extraction for asset: $Filtereddisplay" -Level INFO
                 Write-Host "Extracting ZIP file..."
                 Expand-Archive "$env:TEMP\tmp.zip" -DestinationPath "$env:TEMP\unzipped" -Force -Verbose
-                if (!(Test-Path "$env:TEMP\unzipped")) { Write-Host "Extraction failed" }
+                if (!(Test-Path "$env:TEMP\unzipped")) { 
+                    Write-Log -Message "Extraction failed: $env:TEMP\unzipped not found for asset: $Filtereddisplay" -Level ERROR
+                    Write-Host "Extraction failed"
+                    return
+                }
+                Write-Log -Message "Extraction succeeded for asset: $Filtereddisplay" -Level INFO
                 Write-Host "Extraction succeeded"
                 
                 $packageFolder = Get-ChildItem "$env:TEMP\unzipped" | Where-Object { $_.Name -match '^pak\d+_dir\.vpk$' } | Select-Object -First 1
                 $Filename = $packageFolder.Name
                 write-host "$Filename" -ForegroundColor Yellow
                 
+                Write-Log -Message "Moving files to install path: $installpath for asset: $Filtereddisplay" -Level INFO
                 Write-Host "Moving files..."
                 Move-Item "$env:TEMP\unzipped\*" "$installpath" -Force -Verbose
+                Write-Log -Message "Files moved successfully for asset: $Filtereddisplay" -Level INFO
                 Write-Host "Files moved successfully."
                 Remove-Item "$env:TEMP\tmp.zip" -Force -ErrorAction SilentlyContinue
                 Remove-Item "$env:TEMP\unzipped" -Recurse -Force -ErrorAction SilentlyContinue
                 
-
-                # Ohne Debuggen
-                #Invoke-WebRequest "https://skeptic-systems.de/data/deadlock/abrams/SenatorArmstrong.zip" -OutFile "$env:TEMP\tmp.zip"
-                #Expand-Archive "$env:TEMP\tmp.zip" -DestinationPath "$env:TEMP\unzipped" -Force
-                #$packageFolder = Get-ChildItem "$env:TEMP\unzipped" | Where-Object { $_.Name -match '^pak\d+_dir\.vpk$' } | Select-Object -First 1
-                #$Filename = $packageFolder.Name
-                #Move-Item "$env:TEMP\unzipped\*" "C:\Users\jonas\Desktop\test" -Force
-                #remove-item "$env:TEMP\tmp.zip"
-                #remove-item "$env:TEMP\unzipped"
-                # Kann gelöscht werden 
-                #Update-Charlist -SearchKey "FileName" -SearchValue "$Filename" -UpdateKey "isinstalled" -UpdateValue $true
 
                 # Bestimmen von Class und Skinname
                 $teile = $Downloadlink -split '/'
@@ -81,24 +100,23 @@ function Install-asset {
                 }
                 $skinName = $skinName.Substring(0,1).ToUpper() + $skinName.Substring(1)
 
+                Write-Log -Message "Determined asset details: Class: $className, Asset: $skinName" -Level INFO
+
                 # Eintrag in die json Datei
                 Save-Charlist -ClassName $className -FileName $Filename -SkinName $skinName -inspectlink $Inspectlink
+                Write-Log -Message "Updated JSON with asset details: Class: $className, Asset: $skinName, Filename: $Filename" -Level INFO
                 
-                # Erfolgreiche Ausgabe
-                $skinPath = Join-Path -Path $InstallPath -ChildPath $Filename
-                if (Test-path $skinPath) {
-                    Write-Host "Asset installed successfully" -ForegroundColor Green
-                }
-                else {
-                    write-host "The Asset could not be installed" -ForegroundColor Red
-                }
+                Write-Log -Message "Asset installation completed for: $Filtereddisplay" -Level INFO
+                Write-Host "Asset installed successfully" -ForegroundColor Green
                 start-sleep -Seconds 2
 
             }
             "e" {
+                Write-Log -Message "User selected to go back from asset installation for: $Filtereddisplay" -Level INFO
                 & "C:\Program Files\dsl\install\skinmenu.ps1"
             }
             default {
+                Write-Log -Message "Invalid input in Install-asset for: $Filtereddisplay, input: $caseInput" -Level WARN
                 Write-Host "Invalid input"
                 $validinput = $false
                 start-sleep -Seconds 2

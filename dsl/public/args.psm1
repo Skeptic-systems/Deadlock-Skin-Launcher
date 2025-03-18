@@ -121,3 +121,42 @@ function Remove-Charlist {
     $newData = $data | Where-Object { $_.FileName -ne $FileName }
     $newData | ConvertTo-Json -Depth 3 | Out-File -FilePath $FilePath -Force
 }
+
+function Write-Log {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Message,
+        [ValidateSet("INFO", "WARN", "ERROR")]
+        [string]$Level = "INFO"
+    )
+    
+    # Beim ersten Aufruf: Logdatei erstellen
+    if (-not $global:logFilePath) {
+        $logFolder = "C:\Program Files\dsl\logs"
+        # Falls der Logordner nicht existiert, wird er erstellt.
+        if (-not (Test-Path $logFolder)) {
+            New-Item -Path $logFolder -ItemType Directory -Force | Out-Null
+        }
+        $timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+        $global:logFilePath = "$logFolder\log_$timestamp.txt"
+        New-Item -Path $global:logFilePath -ItemType File -Force | Out-Null
+    }
+    
+    $timeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $logEntry = "$timeStamp [$Level] $Message"
+    Add-Content -Path $global:logFilePath -Value $logEntry
+}
+
+function Write-Log {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Message,
+        [ValidateSet("INFO", "WARN", "ERROR")]
+        [string]$Level = "INFO"
+    )
+
+    $timeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $logEntry = "$timeStamp [$Level] $Message"
+    Add-Content -Path $global:logFilePath -Value $logEntry
+}
+

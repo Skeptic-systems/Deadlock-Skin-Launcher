@@ -20,25 +20,31 @@ write-Host @"
 Write-Host "`n"
 write-host " > " -NoNewline -ForegroundColor cyan
 $assetinput = Read-Host
+Write-Log -Message "Asset menu input received: $assetinput" -Level INFO
     switch ($assetinput) {
     
         1 {
+            Write-Log -Message "User selected option 1 in asset menu" -Level INFO
             $skinName = Get-Skinname -ClassName "fart"
             if ($skinName) {
+                Write-Log -Message "Asset 'Fart Sound' already installed" -Level WARN
                 Write-Host "This asset is already installed" -ForegroundColor Red
                 $validinput = $false
                 Start-Sleep -Seconds 2
             }
             else {
+                Write-Log -Message "Installing asset 'Fart Sound'" -Level INFO
                 install-asset -Display "[1] Fart" -Inspectlink "https://gamebanana.com/mods/560795" -Downloadlink "https://skeptic-systems.de/data/deadlock/assets/fart.zip"
             }
         }
         default {
+            Write-Log -Message "Invalid asset menu input: $assetinput" -Level WARN
             write-Host "Wrong Case Input" -ForegroundColor Red
             start-sleep -seconds 2
             $validinput -eq $false
         }
         "e" {
+           Write-Log -Message "User selected to go back from asset menu" -Level INFO
            & "C:\Program Files\dsl\install\installmenu.ps1"
         }
 }
